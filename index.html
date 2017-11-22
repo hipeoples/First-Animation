@@ -1,0 +1,67 @@
+<html>
+
+   <head>
+  </head>
+   
+   <body>
+
+
+<script>
+
+// Animation made at https://www.khanacademy.org/partner-content/pixar/animate/ball/a/saving-your-animation
+
+frameRate(24);
+var n = 47;
+var xArray = [0,10,20,30,39,49,58,67,75,84,93,101,109,118,126,134,142,151,159,167,175,183,191,199,208,216,224,232,240,248,256,265,273,281,290,298,307,315,324,333,342,351,360,370,379,390,400];
+var yArray = [176,164,155,146,140,136,133,133,135,140,148,160,176,198,224,260,305,269,243,224,208,196,187,181,177,175,175,178,184,192,204,219,239,267,305,251,217,195,180,171,167,167,171,179,194,216,258];
+var sArray = [50,57,64,69,74,77,80,81,82,81,78,75,69,61,51,36,15,31,43,52,59,65,70,74,76,78,79,78,77,74,70,64,56,44,21,41,53,61,65,68,69,68,66,63,60,55,50];
+var rArray = [2,2,2,1,1,1,1,0,0,0,0,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,0,-1,-2,-3,-3,-4,-5,-5,-6,-6,-6,-6,-6,-6,-6,-6,-5,-5,-4,-3,-1,0,2];
+
+var ball = getImage('pixar/luxoball');
+
+var drawBall = function(img, x, y, r, s) {
+	s = map(s, 0, 100, 0.1, 1.9);
+	var rx = 32 * (2 - s);
+	var ry = 32 * s;
+
+	// Shadow
+	pushMatrix();
+	translate(x + 1, y - ry / 2 + 1);
+	rotate(r);
+	noStroke();
+	fill(0, 0, 0, 60);
+	ellipse(0, 0, rx - 3, ry - 3);
+	popMatrix();
+
+	// Ball
+	pushMatrix();
+	translate(x, y - ry / 2);
+	rotate(r);
+	image(img, -rx/2, -ry/2, rx, ry);
+	popMatrix();
+};
+
+draw = function() {
+	background(0);
+	fill(230, 240, 255);
+	noStroke();
+	rect(-1, 75, width + 2, 250);
+	fill(120, 200, 160);
+	rect(-1, 305, width + 2, 20);
+	strokeWeight(2);
+	stroke(28, 173, 123);
+	line(-1, 305, width + 1, 305);
+
+	var x = xArray[frameCount % n];
+	var y = yArray[frameCount % n];
+	var r = rArray[frameCount % n];
+	var s = sArray[frameCount % n];
+	drawBall(ball, x, y, r, s);
+};
+✖
+</script>
+
+  </body>
+   
+</html>
+
